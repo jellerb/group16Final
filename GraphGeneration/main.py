@@ -4,7 +4,6 @@ import plotly.offline as pyo
 import plotly.graph_objs as go
 import plotly.express as px
 import csv
-import numpy as np
 
 datavar = "annual_aqi_by_county_2021.csv"
 
@@ -44,10 +43,13 @@ def generateStatesGraph(dataset):
     pyo.plot(fig, filename=file_name)
 
 def generateCountyGraphs(dataset):
+    #Define variables
     states = {}
     data_doc = open(dataset, 'r')
     data = csv.reader(data_doc)#, delimiter=' ', quotechar='"')
 
+    #Iterate through the CSV file and make a dictionary storing the counties by state.
+    #Example: {"North Carolina": ["Mecklenburg", "Orange", "Wake", "Cabarrus"]}
     for row in data:
         if row[0] not in states:
             states[row[0]] = [row[1]]
@@ -56,37 +58,44 @@ def generateCountyGraphs(dataset):
             temp.append(row[1])
             states[row[0]] = temp
 
+    #Iterate through the dict of states and grab the counties in each state.
     for state in states:
         data_doc.seek(0)
         display_data = {}
 
+        #Read through the csv file row by row and check it against the current state
         for row in data:
             print(row)
-            if row[0] == state and row[0] != "State":
-                converted = row[3:]
-                new_conv = [row[2],]
-                for number in converted:
-                    new_conv.append(int(number))
-                display_data[row[1]] = new_conv
-            if row[0] == "State":
-                display_data[row[1]] = row[2:]
-   
+            if row[0] == state or row[0] == "State":
+                append_list = row[2:]
+                final_list = []
 
-        print(display_data)
+                #Convert all integer compatible values, i.e. "0", to integers.
+                #Fixes error with stacked graph displaying incorrectly.
+                for item in append_list:
+                    try:
+                        final_list.append(int(item))
+                    except:
+                        final_list.append(item)
+                display_data[row[1]] = final_list
+        
+        #The way that the dict is written includes the header, this if statement will make it skip the header and only the header.
         if (len(display_data.keys()) > 1):
             df = DataFrame.from_dict(display_data, orient='index').reset_index()
             column_array = ['County',]
 
+            #Create the header data for the dataframe.
             for item in display_data['County']:
                 column_array.append(item)
 
+            #Add the ehader data, drop the header which was taken as data, and reset the index.
             df.set_axis(column_array, axis=1, inplace=True)
             df = df.drop(0)
             df.reset_index()
-
             print("\n\n\n")
             print(df)
 
+            #Create a new dataframe for display which has the pertinent information.
             new_df = df.groupby(['County']).agg({
                 'Good Days': 'sum',
                 'Moderate Days': 'sum',
@@ -97,18 +106,18 @@ def generateCountyGraphs(dataset):
                 'Days with AQI': 'sum'
                 }).reset_index()
 
+            #Sort the new dataframe by the amount of data, low to high.
             new_df = new_df.sort_values(by=['Days with AQI'], ascending=[True])
-            #new_df[2:] = new_df[2:].apply(pd.to_numeric)
             print(new_df)
             
             #"Good Days","Moderate Days","Unhealthy for Sensitive Groups Days","Unhealthy Days","Very Unhealthy Days","Hazardous Days"
+            #This creates the different bars for the stacked bar chart to use.
             trace1 = go.Bar(x=new_df['County'], y=new_df['Good Days'], name='Good Days', marker={'color': '#00FF00'})
             trace2 = go.Bar(x=new_df['County'], y=new_df['Moderate Days'], name='Moderate Days', marker={'color': '#FFFF00'})
             trace3 = go.Bar(x=new_df['County'], y=new_df['Unhealthy for Sensitive Groups Days'], name='Unhealthy for Sensitive Groups', marker={'color': '#FFA500'})
             trace4 = go.Bar(x=new_df['County'], y=new_df['Unhealthy Days'], name='Unhealthy Days', marker={'color': '#FF0000'})
             trace5 = go.Bar(x=new_df['County'], y=new_df['Very Unhealthy Days'], name='Very Unhealthy Days', marker={'color': '#8B0000'})
             trace6 = go.Bar(x=new_df['County'], y=new_df['Hazardous Days'], name='Hazardous Days', marker={'color': '#000000'})
-
             output_data = [trace1, trace2, trace3, trace4, trace5, trace6]
 
             # Preparing layout
@@ -116,11 +125,11 @@ def generateCountyGraphs(dataset):
             layout = go.Layout(title=title_string, xaxis_title="County", yaxis_title="Days Polled", barmode='stack')
 
             # Plot the figure and saving in a html file
-
             fig = go.Figure(data=output_data, layout=layout)
             file_name = "graphs/" + state + "CountyAQI.html"
             pyo.plot(fig, filename=file_name)
 
+    #Close the reader.
     data_doc.close()
 
 generateCountyGraphs(datavar)
