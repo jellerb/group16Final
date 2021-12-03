@@ -6,6 +6,7 @@ import plotly.express as px
 import csv
 
 datavar = "annual_aqi_by_county_2021.csv"
+yearvar = "US_Average_AQI.csv"
 
 def generateStatesGraph(dataset):
     # Load CSV file from Datasets folder
@@ -132,5 +133,26 @@ def generateCountyGraphs(dataset):
     #Close the reader.
     data_doc.close()
 
+def generateByYearGraphs(dataset):
+    data_dict = {}
+    data_doc = open(dataset, 'r')
+    data = csv.reader(data_doc)#, delimiter=' ', quotechar='"')
+
+    #Parse data into dict
+    for row in data:
+        data_dict[int(row[0])] = float(row[1])
+
+    #Create Data Frame and prepare to make graph.
+    df = DataFrame.from_dict(data_dict, orient='index').reset_index()
+    df.rename(columns={'index': 'year', 0: 'AQI'}, inplace=True)
+    print(df)
+
+    fig = px.line(df, x="year", y="AQI", title='AQI Per Year Since 1980')
+    #fig.show()
+
+    file_name = "graphs/yearlyAQI.html"
+    pyo.plot(fig, filename=file_name)
+
 generateCountyGraphs(datavar)
 generateStatesGraph(datavar)
+generateByYearGraphs(yearvar)
