@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4aafd462-7060-4833-bf5d-5fc86ee30169" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/doYourPart.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/healthRisks.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/earth.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cloud.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cloud2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/clouds3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/grass.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/wave.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/wind2.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Map.html" beforeDir="false" afterPath="$PROJECT_DIR$/Map.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doYourPart.html" beforeDir="false" afterPath="$PROJECT_DIR$/doYourPart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/healthRisks.html" beforeDir="false" afterPath="$PROJECT_DIR$/healthRisks.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test1.html" beforeDir="false" afterPath="$PROJECT_DIR$/test1.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,5 +69,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1637612475629" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1638463406501">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1638463406501" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1638392761018">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1638392761018" />
   </component>
 </project>
