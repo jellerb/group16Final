@@ -136,7 +136,7 @@ def generateCountyGraphs(dataset):
 def generateByYearGraphs(dataset):
     data_dict = {}
     data_doc = open(dataset, 'r')
-    data = csv.reader(data_doc)#, delimiter=' ', quotechar='"')
+    data = csv.reader(data_doc)
 
     #Parse data into dict
     for row in data:
@@ -147,12 +147,60 @@ def generateByYearGraphs(dataset):
     df.rename(columns={'index': 'year', 0: 'AQI'}, inplace=True)
     print(df)
 
+    #Generate the graph
     fig = px.line(df, x="year", y="AQI", title='AQI Per Year Since 1980')
     #fig.show()
-
     file_name = "graphs/yearlyAQI.html"
+    pyo.plot(fig, filename=file_name)
+
+def generatePieGraph(dataset):
+    data_dict = {}
+    data_doc = open(dataset, 'r')
+    data = csv.reader(data_doc)
+
+    #Parse data into dict
+    for row in data:
+        data_dict[row[0]] = row[1:]
+
+    #Create Data Frame and prepare to make graph.
+    df = DataFrame.from_dict(data_dict, orient='index').reset_index()
+
+    column_array = ['State',]
+
+    #Create the header data for the dataframe.
+    for item in data_dict['State']:
+        column_array.append(item)
+
+    #Purge the incorrectly parsed line and add the correct headers to the dataframe.
+    df.set_axis(column_array, axis=1, inplace=True)
+    df = df.drop(0)
+    df.reset_index()
+    print(df)
+    
+    #Tries to turn every value in the dataframe into a float, passes over the ones it fails.
+    #This is done because when the dict was created, all values parsed from the csv were strings.
+    df = df.apply(pd.to_numeric, errors='ignore')
+
+    #Create a new dictionary using the dataset, this will be used to generate the final dataset.
+    data_set = {
+        'Good Days': sum(df['Good Days']),
+        'Moderate Days': sum(df['Moderate Days']),
+        'Unhealthy for Sensitive Groups Days': sum(df['Unhealthy for Sensitive Groups Days']),
+        'Unhealthy Days': sum(df['Unhealthy Days']),
+        'Very Unhealthy Days': sum(df['Very Unhealthy Days']),
+        'Hazardous Days': sum(df['Hazardous Days'])
+    }
+
+    #Convert the dictionary into a dataframe for the graph generation.
+    new_df = DataFrame.from_dict(data_set, orient='index').reset_index()
+
+    #Generate the pie chart.
+    fig = px.pie(new_df, values=0, names='index', title='AQI In the United States in 2021')
+    #fig.show()
+    file_name = "graphs/USAPieChart.html"
     pyo.plot(fig, filename=file_name)
 
 generateCountyGraphs(datavar)
 generateStatesGraph(datavar)
 generateByYearGraphs(yearvar)
+generatePieGraph(datavar)
