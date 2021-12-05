@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4aafd462-7060-4833-bf5d-5fc86ee30169" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Graphs/CODEAQI.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Graphs/StateMap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/plant.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graphs/mapTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graphs/mapTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Map.html" beforeDir="false" afterPath="$PROJECT_DIR$/Map.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doYourPart.html" beforeDir="false" afterPath="$PROJECT_DIR$/doYourPart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/healthRisks.html" beforeDir="false" afterPath="$PROJECT_DIR$/healthRisks.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
