@@ -23,7 +23,7 @@
     .sidenav {
       padding-top: 20px;
       background-color: #B4B0B6;
-      height: 400%;
+      height: 200%;
     }
 
     /* Set black background color, white text and some padding */
@@ -41,6 +41,8 @@
       }
       .row.content {height:auto;}
     }
+
+
 
 
   </style>
@@ -76,20 +78,27 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <img src="images/clouds3.gif" style="width: 500px; height: 200px; position: absolute; top: 10px; left: -25px;">
-      <img src="images/wind2.gif" style="width: 300px; height: 300px; position: absolute; top: 1500px; left: -10px;">
+      <img src="images/wind2.gif" style="width: 300px; height: 300px; position: absolute; top: 600px; left: -10px;">
     </div>
+
     <div class="col-sm-8 text-left">
       <h1>Maps</h1>
-      <p>The map below shows the United States of America, Please select a desired state to view information regarding
-        the air quality of the state. Another map is also featured below that is made with reference and county.</p>
+      <p>The two maps below both show the United States of America. Here, you can select a desired state or view a county, based on it's FIPS code, to learn about the AQI in that region.
+        This data was gathered from the United States Environmental Protection Agency. </p>
+        <li><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#Annual">Click here to access the air quality index data!</a></li>
+
       <hr>
       <h3>How is My State Doing?</h3>
-      <p>Below is a graph that shows the average Air Quality Index by state. This graph sorts the states by the lower AQI. Here, you can see where your states lands compared to others.</p>
+      <p>Below are the maps that show the United States of America and there associated AQI of the region.
+        These graphs sort from lower AQI to higher AQI to provide and visualize the data given.</p>
+
+
       <div>
-        <iframe src="Graphs/StateAqiMap.html"style="width: 800px; height: 700px; position: absolute; top: 230px; left: 100px;"></iframe>
+        <iframe src="Graphs/StateAqiMap.html"style="width: 600px; height: 500px; position: absolute; top: 250px; left: 25px;"></iframe>
       </div>
+
       <div>
-         <iframe src="Graphs/index.html"style="width: 800px; height: 700px; position: absolute; top: 1000px; left: 100px;"></iframe>
+         <iframe src="Graphs/index.html"style="width: 600px; height: 500px; position: absolute; top: 250px; left: 635px;"></iframe>
       </div>
 
     </div>

@@ -14,6 +14,7 @@ fig = go.Figure(data=go.Choropleth(
 fig.update_layout(
     title_text = 'Average Air Quality Index By State',
     geo_scope='usa', # limite map scope to USA
+    paper_bgcolor = "#D0DDE3",
 )
 
 import plotly.io as pio
